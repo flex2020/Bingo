@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>나의 빙고판 - 마이 빙고</title>
+
+</head>
+<body>
+<div class="container">
+  <div id="sub_title">
+    <h1>나의 빙고판 - 마이 빙고</h1>
+    <h2>나만의 빙고를 만들어보세요!</h2>
+  </div>
+  <!-- 빙고의 주제 입력 부분 -->
+  <div id="bingo_subject_area">
+    <input id="bingo_subject" type="text" placeholder="빙고의 주제를 입력해주세요.(ex. 과일)"></input>
+  </div>
+  <!-- 빙고가 나타나는 부분 -->
+  <div id="bingo_container" style="width: 700px; height: 700px;">
+
+  </div>
+  <!-- 빙고 굳히기 -->
+  <div>
+    <button id="freeze_button" class="button">빙고 굳히기</button>
+  </div>
+  <!-- 빙고 크기 조절 -->
+  <div>
+    <label>빙고의 크기</label>
+    <select id="size_list">
+      <option value="3">3x3</option>
+      <option value="4">4x4</option>
+      <option value="5">5x5</option>
+      <option value="6">6x6</option>
+      <option value="7">7x7</option>
+    </select>
+  </div>
+</div>
+
+</body>
+</html>
+<style>
+  body {
+    background-color: aqua;
+  }
+
+  .button {
+    size: auto;
+  }
+  .bingo_piece {
+    background-color: coral;
+    width: 100%;
+    resize: none;
+  }
+  .textwrapper {
+    margin:5px 0;
+    padding:3px;
+  }
+</style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+  let isFreeze = false;
+  init();
+
+  // 이벤트 리스너 달기
+  function init() {
+      //---빙고 굳히기
+      document.getElementById('freeze_button').onclick = function () {
+        if(!isFreeze) {
+          $('#bingo_subject').attr('readonly', true);
+          $('#freeze_button').html('빙고 굳히기 해제');
+          isFreeze = true;
+        } else {
+
+          $('#bingo_subject').attr('readonly', false);
+          $('#freeze_button').html('빙고 굳히기');
+          isFreeze = false;
+        }
+      }
+      //--- 드롭다운 선택
+      document.getElementById('size_list').onclick = function () {
+          $('#bingo_container').empty();
+          let piece_size = 700 / this.value;
+          let ta = '<div class="textwrapper"><textarea class="bingo_piece" rows="10"></textarea></div>';
+          for(var i=0; i<this.value; i++) {
+            for(var j=0; j<this.value; j++) {
+                $('#bingo_container').append(ta);
+              }
+            $('#bingo_container').append(div);
+          }
+      }
+  }
+
+</script>
